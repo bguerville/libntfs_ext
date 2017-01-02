@@ -43,9 +43,9 @@
 
 #if defined(PS3_GEKKO)
 #include "ntfs.h"
-#include "ps3_io.c"
+//#include "ps3_io.c"
 	#ifdef __CELLOS_LV2__
-	#include "../defines/cellos_lv2.h"
+	#include "defines/cellos_lv2.h"
 	#endif
 
 const INTERFACE_ID ntfs_disc_interfaces[] = {
@@ -186,7 +186,7 @@ const devoptab_t *ntfsGetDevice (const char *path, bool useDefaultDevice)
     // chances are that this path has no device name in it.
     // Call GetDeviceOpTab to get our default device (chdir).
     if (useDefaultDevice) {
-	panic("NTFS: Using default device");
+	ntfs_log_warning("NTFS: Using default device");
         for (i = 0; i < STD_MAX; i++) {
         devoptab = devoptab_list[i];
         if (devoptab && devoptab->name) {

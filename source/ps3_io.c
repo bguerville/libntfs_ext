@@ -29,7 +29,7 @@
 #ifdef __CELLOS_LV2__
 	#include <cell/fs/cell_fs_file_api.h>
 	#include <sys/timer.h>  /* for usleep() */
-	#include "../defines/cellos_lv2.h"
+	#include "defines/cellos_lv2.h"
 	#include "types.h"
 	#if 0
 	#define SC_FS_LINK						(810)
@@ -1307,13 +1307,13 @@ int ps3ntfs_errno(void)
 
 #ifdef PS3_STDIO
 	#ifdef __CELLOS_LV2__
-		#include "includes/sys_reent.h"
+		#include "sys_reent.h"
 		#include "types.h"
 		#include <sys/time.h>
 		//#include <sys/times.h>
 		#include <sys/stat.h>
-		#include "includes/dirent.h"
-		#include "includes/resource.h"
+		#include "dirent.h"
+		#include "resource.h"
 		#include <utime.h>
 	#else
 		#include <sys/reent.h>
@@ -1381,6 +1381,7 @@ struct __syscalls_t {
 	void (*exit)(int rc);
 };
 
+static struct __syscalls_t __syscalls; // this fix the reference to undefined symbol __syscalls
 extern struct __syscalls_t __syscalls;
 static struct __syscalls_t sv_syscalls;
 static sys_lwmutex_t sys_lock;
